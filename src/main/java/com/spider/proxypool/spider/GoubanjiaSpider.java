@@ -2,12 +2,12 @@ package com.spider.proxypool.spider;
 
 import com.spider.proxypool.entity.ProxyEntity;
 import com.google.common.base.Strings;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,7 +24,7 @@ public class GoubanjiaSpider extends AbstractSpider<List<ProxyEntity>> {
 
     private static final String BASE_URL = "http://www.goubanjia.com/free/";
 
-    private static final Logger logger = LoggerFactory.getLogger(GoubanjiaSpider.class);
+    private static final Logger logger = LogManager.getLogger(GoubanjiaSpider.class);
 
     private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -54,7 +54,9 @@ public class GoubanjiaSpider extends AbstractSpider<List<ProxyEntity>> {
         List<ProxyEntity> res = new ArrayList<>();
         Document doc = Jsoup.parse(html);
         Elements tables = doc.select("tbody");
-
+        if (tables == null || tables.isEmpty()) {
+            return res;
+        }
         for (Element table : tables) {
             Elements trs = table.select("tr");
 

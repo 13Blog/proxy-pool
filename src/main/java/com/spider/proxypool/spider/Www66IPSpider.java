@@ -6,8 +6,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;import org.apache.logging.log4j.Logger;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +20,7 @@ import java.util.List;
  */
 public class Www66IPSpider extends AbstractSpider<List<ProxyEntity>> {
 
-    private static final Logger logger = LoggerFactory.getLogger(Www66IPSpider.class);
+    private static final Logger logger = LogManager.getLogger(Www66IPSpider.class);
 
     private static final String BASE_URL = "http://www.66ip.cn";
 
@@ -54,7 +53,9 @@ public class Www66IPSpider extends AbstractSpider<List<ProxyEntity>> {
         List<ProxyEntity> res = new ArrayList<>();
         Document doc = Jsoup.parse(html);
         Elements tables = doc.select("tbody");
-
+        if (tables == null || tables.isEmpty()) {
+            return res;
+        }
         for (Element table : tables) {
             Elements trs = table.select("tr");
 

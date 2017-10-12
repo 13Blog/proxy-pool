@@ -56,7 +56,9 @@ public class SweiDailiSpider extends AbstractSpider<List<ProxyEntity>> {
         List<ProxyEntity> res = new ArrayList<>();
         Document doc = Jsoup.parse(html);
         Elements tables = doc.select("tbody");
-
+        if (tables == null || tables.isEmpty()) {
+            return res;
+        }
         for (Element table : tables) {
             Elements trs = table.select("tr");
             for (int i = 1; i < trs.size(); i++) {
