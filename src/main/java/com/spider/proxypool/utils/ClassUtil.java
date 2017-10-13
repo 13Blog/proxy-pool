@@ -1,13 +1,12 @@
 package com.spider.proxypool.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;import org.apache.logging.log4j.Logger;
 
 import java.net.URL;
 
 public class ClassUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(ClassUtil.class);
+    private static final Logger logger = LogManager.getLogger(ClassUtil.class);
 
     /**
      * 获取类加载器

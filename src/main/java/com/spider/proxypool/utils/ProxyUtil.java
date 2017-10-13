@@ -2,8 +2,7 @@ package com.spider.proxypool.utils;
 
 import com.spider.proxypool.common.Constants;
 import com.spider.proxypool.entity.ProxyEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.net.*;
@@ -13,7 +12,7 @@ import java.net.*;
  */
 public class ProxyUtil {
 
-    private static final Logger logger = LoggerFactory.getLogger(ProxyUtil.class);
+    private static final Logger logger = LogManager.getLogger(ProxyUtil.class);
 
 
     public static boolean verifyProxy(ProxyEntity proxy) {
